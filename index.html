@@ -37,4 +37,72 @@
                     <option value="meetup">Community Meetup</option>
                 </select>
             </div>
-               
+            <button type="submit">Register for Event</button>
+            <p id="thankYouMessage" style="display:none;">Registration successful! Check your email for details.</p>
+        </form>
+    </main>
+
+    <button type="submit">Register for Event</button>
+    <div id="thankYouMessage" style="display:none;" class="success-box">
+        <h2>Registration Confirmed!</h2>
+        <p>Thank you, <span id="finalName"></span>, for registering!</p>
+        <p>A confirmation has been sent to: <span id="finalEmail"></span></p>
+        <p>Event Type: <span id="finalEventType"></span></p>
+        <p>Participation: <span id="finalParticipation"></span></p>
+    </div>
+</form>
+</main>
+
+<script>
+const form = document.getElementById('eventForm');
+const regNameInput = document.getElementById('regName');
+const regEmailInput = document.getElementById('regEmail');
+const dobInput = document.getElementById('dob');
+const ageWarning = document.getElementById('ageWarning');
+const thankYouMessage = document.getElementById('thankYouMessage');
+const summaryName = document.getElementById('summaryName');
+const summaryEmail = document.getElementById('summaryEmail');
+
+// Dynamic summary update
+regNameInput.addEventListener('input', () => { summaryName.textContent = regNameInput.value; });
+regEmailInput.addEventListener('input', () => { summaryEmail.textContent = regEmailInput.value; });
+
+dobInput.addEventListener('change', () => {
+    const birthDate = new Date(dobInput.value);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+    ageWarning.style.display = age < 18 ? 'block' : 'none';
+});
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const birthDate = new Date(dobInput.value);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+
+    if (age < 18) { alert('You must be at least 18 years old to register.'); return; }
+
+    const participationType = document.querySelector('input[name="participation"]:checked').value;
+
+    console.log('Form Submitted!', {
+        name: regNameInput.value, email: regEmailInput.value, dob: dobInput.value,
+        eventType: document.getElementById('eventType').value,
+        participation: participationType,
+        termsAgreed: document.getElementById('terms').checked
+    });
+
+    // Populate success message
+    document.getElementById('finalName').textContent = regNameInput.value;
+    document.getElementById('finalEmail').textContent = regEmailInput.value;
+    document.getElementById('finalEventType').textContent = document.getElementById('eventType').options[document.getElementById('eventType').selectedIndex].text;
+    document.getElementById('finalParticipation').textContent = participationType === 'online' ? 'Online' : 'In-Person';
+
+    form.style.display = 'none';
+    thankYouMessage.style.display = 'block';
+});
+</script>
