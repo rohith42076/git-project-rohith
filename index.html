@@ -26,4 +26,15 @@
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" required aria-label="Your date of birth">
                 <small id="ageWarning" style="color: red; display: none;">Must be at least 18 years old to register.</small>
-            </div>           
+            </div>
+            <div class="form-group">
+                <label for="eventType">Event Type:</label>
+                <select id="eventType" name="eventType" required aria-label="Select an event type">
+                    <option value="">-- Select Event --</option>
+                    <option value="workshop">Workshop Series</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="webinar">Webinar</option>
+                    <option value="meetup">Community Meetup</option>
+                </select>
+            </div>
+               
