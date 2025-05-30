@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" required aria-label="Your date of birth">
-                <small id="ageWarning" style="color: red; display: none;">Must be at least 18 years old to register.</small>
+		
             </div>
             <div class="form-group">
                 <label for="eventType">Event Type:</label>
@@ -87,7 +87,12 @@ form.addEventListener('submit', function(event) {
 
     if (age < 18) { alert('You must be at least 18 years old to register.'); return; }
 
-    const participationType = document.querySelector('input[name="participation"]:checked').value;
+    <div class="form-group radio-group">
+    <label>Participation Type:</label>
+    <label><input type="radio" name="participation" value="online" required> Online</label>
+    <label><input type="radio" name="participation" value="in-person"> In-Person</label>
+</div>
+		
 
     console.log('Form Submitted!', {
         name: regNameInput.value, email: regEmailInput.value, dob: dobInput.value,
