@@ -41,11 +41,18 @@
                 </select>
             </div>
 	    <button type="submit">event regestier</button>
-            <p id="thankYouMessage" style="display:none;">Registration successful! Check your email for details.</p>
+         <div id="thankYouMessage" style="display:none;" class="success-box">
+    <h2>Registration Confirmed!</h2>
+    <p>Thank you, <span id="finalName"></span>, for registering!</p>
+    <p>A confirmation has been sent to: <span id="finalEmail"></span></p>
+    <p>Event Type: <span id="finalEventType"></span></p>
+    <p>Participation: <span id="finalParticipation"></span></p>
+</div>
         </form>
     </main>
 
-    <button type="submit">Register for Event</button>
+
+<button type="submit">Register for Event</button>
     <div id="thankYouMessage" style="display:none;" class="success-box">
         <h2>Registration Confirmed!</h2>
         <p>Thank you, <span id="finalName"></span>, for registering!</p>
